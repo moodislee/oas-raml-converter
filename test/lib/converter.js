@@ -500,3 +500,54 @@ describe.skip('from swagger to raml: apis-guru', function () {
 		}
 	});
 });
+
+describe('from raml (URL) to swagger: apis-guru', function () {
+	//TODO: Test with includes that contains includes fail, need to check parser for fix it
+	//TODO: RAML example when converts and activate flag validate get errors
+	let baseURI = 'https://raw.githubusercontent.com/mulesoft/oas-raml-converter/master/test/data/apis-guru/raml/';
+	let baseDir = __dirname + '/../data/apis-guru/raml';
+	let testFiles = fs.readdirSync(baseDir);
+	let testUrls = [];
+
+	testFiles.forEach(function (testFile) {
+		if (!_.startsWith(testFile, '.') && !_.includes(testFile, 'ignore')) {
+			testUrls.push(baseURI + testFile);
+		}
+	});
+
+	const testWithUrl = (url) => {
+		return new Promise((resolve, reject) => {
+			const converter = new specConverter.Converter(specConverter.Formats.RAML10, specConverter.Formats.SWAGGER);
+			const validateOptions = {
+				validate: false, //Anyof, OneOf get conversion errors
+				httpResolver:  {
+				    getResource: function(path) {
+						return {'errorMessage': 'Method not allowed for URL ' + path + ' , only getResourceAsync'};
+				    },
+				    getResourceAsync: function(path) {
+						return new Promise(function(resolve, reject) {
+				        	urlHelper.get(path).then(function(response) {
+				          		resolve({content: response});
+				        	}).catch(function(error) {
+				          		reject({'errorMessage':'Error getting ' + path, 'error': error});
+				        	});
+				        });
+				    }
+				}
+			};
+
+			converter.convertFile(url, validateOptions).then((convertedRAML) => {
+				resolve(convertedRAML);
+			}).catch((err) => {
+				reject(err);
+			});
+		})
+	};
+
+	testUrls.forEach(function(url) {
+		it('Test URL RAML: ' + url, function() {
+			return testWithUrl(url);
+		});
+	});
+
+});
