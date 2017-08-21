@@ -27,6 +27,7 @@ const toJSONOptions = { serializeMetadata: false, sourceMap: true };
 const RamlErrorModel = require('../helpers/ramlErrorModel');
 const jsonHelper = require('../utils/json');
 const path = require('path');
+const urlHelper = require('../utils/url');
 
 class RamlConverter extends Converter {
 
@@ -40,9 +41,10 @@ class RamlConverter extends Converter {
 	
 	_loadFile(filePath:string, options:any) {
 		this.filePath = filePath;
-		const fileContent = fs.readFileSync(filePath, 'utf8');
-		
-		this.format = RamlConverter.detectFormat(fileContent);
+		if (!urlHelper.isURL(filePath)) {
+			const fileContent = fs.readFileSync(filePath, 'utf8');
+			this.format = RamlConverter.detectFormat(fileContent);
+		}
 		return new Promise((resolve, reject) => {
 			parser.loadApi(filePath, Converter._options(options)).then((api) => {
 				try {
@@ -50,6 +52,9 @@ class RamlConverter extends Converter {
 					if (!_.isEmpty(errors)) this.errors = jsonHelper.parse(errors);
 					this.data = api.expand(true).toJSON(toJSONOptions);
 					this._removeSourceMapLocalRef(this.data, path.basename(filePath));
+					if (urlHelper.isURL(filePath)) {
+						this.format = api.RAMLVersion();
+					}
 					resolve();
 				}
 				catch (e) {
