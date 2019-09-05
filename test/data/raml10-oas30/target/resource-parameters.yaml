@@ -8,6 +8,7 @@ paths:
     parameters:
       - in: path
         name: id
+        x-example: 1
         required: true
         schema:
           type: integer
@@ -16,6 +17,7 @@ paths:
       - in: path
         name: code
         required: true
+        x-example: xyz
         schema:
           type: string
   '/names/{name}':
@@ -24,6 +26,7 @@ paths:
         description: name
         name: name
         required: true
+        x-example: John
         schema:
           type: string
 components:

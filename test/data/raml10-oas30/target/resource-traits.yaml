@@ -50,6 +50,13 @@ components:
       name: nicknames
       schema:
         type: string
+    trait_pets_comments:
+      in: header
+      name: comments
+      required: true
+      x-example: 12
+      schema:
+        type: integer
     trait_pets_reviews:
       in: header
       name: reviews

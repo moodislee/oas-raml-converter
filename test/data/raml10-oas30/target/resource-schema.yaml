@@ -105,6 +105,7 @@ paths:
         description: Bottle UID
         in: path
         name: bottleUid
+        x-example: d7a852d5-9deb-4e4a-a77f-622b3689d787
         schema:
           type: string
   /employees:

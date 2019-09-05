@@ -11,6 +11,7 @@ paths:
           in: header
           name: reviews
           required: true
+          x-example: ['Great!']
           schema:
             type: array
             items:
@@ -22,6 +23,7 @@ paths:
             type: string
         - in: header
           name: nicknames
+          x-example: nick123
           schema:
             type: string
         - in: header

@@ -124,11 +124,13 @@ paths:
       - in: path
         name: userName
         required: true
+        x-example: user123
         schema:
           type: string
       - in: path
         name: serviceName
         required: true
+        x-example: order
         schema:
           type: string
   '/service/{userName}/{serviceName}/entry':
@@ -246,11 +248,13 @@ paths:
       - in: path
         name: userName
         required: true
+        x-example: user123
         schema:
           type: string
       - in: path
         name: serviceName
         required: true
+        x-example: order
         schema:
           type: string
   '/service/{userName}/{serviceName}/entry/{id}':
@@ -339,11 +343,13 @@ paths:
       - in: path
         name: userName
         required: true
+        x-example: user123
         schema:
           type: string
       - in: path
         name: serviceName
         required: true
+        x-example: order
         schema:
           type: string
 components:

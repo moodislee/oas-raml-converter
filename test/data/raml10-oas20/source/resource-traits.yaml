@@ -11,6 +11,9 @@ traits:
       application/json:
         type: string
     headers:
+      comments:
+        type: integer
+        example: 12
       reviews: string
       age?: integer
     responses:

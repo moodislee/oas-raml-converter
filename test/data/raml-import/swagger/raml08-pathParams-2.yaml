@@ -19,6 +19,7 @@ paths:
         type: string
         enum: [ .json ]
         default: .json
+        x-example: .json
       - name: comment_id
         in: path
         required: true
@@ -44,6 +45,7 @@ paths:
         type: string
         enum: [ .json ]
         default: .json
+        x-example: .json
       - name: id
         in: path
         required: true
@@ -63,6 +65,7 @@ paths:
         description: ID
         required: true
         type: string
+        x-example: "56"
       - name: mediaTypeExtension
         in: path
         description: Media type
@@ -70,6 +73,7 @@ paths:
         type: string
         enum: [ .json ]
         default: .json
+        x-example: .json
     delete:
       operationId: DELETE_identities-idmediaTypeExtension
       description: |

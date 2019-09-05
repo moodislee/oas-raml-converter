@@ -143,8 +143,10 @@ types:
         type: ServiceSpec
   '/{userName}/{serviceName}':
     uriParameters:
-      userName: {}
-      serviceName: {}
+      userName:
+        example: user123
+      serviceName:
+        example: order
     get:
       description: >-
         Get the schema of a service(with name serviceName) of a user (with name

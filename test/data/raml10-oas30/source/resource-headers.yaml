@@ -7,6 +7,7 @@ version: 1
       reviews:
         type: array
         description: Employee´s reviews
+        example: ['Great!']
         items:
           type: string
         required: true
@@ -14,4 +15,5 @@ version: 1
       nicknames:
         type: string
         required: false
+        example: nick123
       age?: integer

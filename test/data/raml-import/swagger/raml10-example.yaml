@@ -32,6 +32,7 @@ paths:
           description: the identifier for the user who posts a new organization
           required: true
           type: string
+          x-example: SWED-123
         - name: body
           in: body
           required: true

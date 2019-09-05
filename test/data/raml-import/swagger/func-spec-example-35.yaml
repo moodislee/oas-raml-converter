@@ -27,6 +27,7 @@ parameters:
     description: access token
     required: true
     type: string
+    x-example: password
 responses:
   'trait:hasFound:200':
     description: ''

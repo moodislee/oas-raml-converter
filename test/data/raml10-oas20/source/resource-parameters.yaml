@@ -6,6 +6,7 @@ version: 1
     id:
       type: integer
       required: false
+      example: 1
     code: string
     name:
       type: string
@@ -15,7 +16,9 @@ version: 1
     code:
       type: string
       required: true
+      example: xyz
 /names/{name}:
   uriParameters:
     name:
       description: name
+      example: John

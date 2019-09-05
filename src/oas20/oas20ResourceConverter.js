@@ -99,6 +99,15 @@ class Oas20ResourceConverter extends Converter {
 					if (!parameter.hasOwnProperty('type')) parameter.type = 'string';
 					if (parameter.$ref) delete parameter.$ref;
 					if (parameter.type === 'array' && !parameter.hasOwnProperty('items')) parameter.items = {type: 'string'};
+					if (parameter.example) {
+						/**
+						 * Add 'example' field as extension, because oas doesn't support 'example' field in path params
+						 * Anyway, it is useful for some tools, for example dredd
+						 * @see https://github.com/apiaryio/dredd/issues/540
+						 * @see https://dredd.readthedocs.io/en/latest/how-it-works.html#uri-parameters
+						 * */
+						parameter['x-example'] = parameter.example;
+					}
 					helper.removePropertiesFromObject(parameter, ['example']);
 					Oas20RootConverter.exportAnnotations(value, parameter);
 					parameters.push(parameter);

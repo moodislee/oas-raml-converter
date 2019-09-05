@@ -12,6 +12,12 @@ parameters:
     in: query
     name: nicknames
     type: string
+  trait:pets:comments:
+    in: header
+    name: comments
+    required: true
+    x-example: 12
+    type: integer
   trait:pets:reviews:
     in: header
     name: reviews

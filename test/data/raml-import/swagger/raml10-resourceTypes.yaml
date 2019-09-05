@@ -27,3 +27,4 @@ parameters:
     description: Access Token
     required: true
     type: string
+    x-example: 5757gh76

@@ -19,6 +19,9 @@ types:
         body:
           application/json:
             schema: pet
+        headers:
+          Server:
+            example: Apache
       201:
         body:
           application/json:

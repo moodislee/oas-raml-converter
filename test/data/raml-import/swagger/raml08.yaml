@@ -53,6 +53,7 @@ paths:
             - accounting
             - payroll
             - finance
+          x-example: accounting
         - name: body
           in: body
           schema:

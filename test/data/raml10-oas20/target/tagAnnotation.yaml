@@ -65,3 +65,4 @@ paths:
         in: path
         name: petId
         required: true
+        x-example: 1

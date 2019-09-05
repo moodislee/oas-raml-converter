@@ -105,7 +105,13 @@ class Oas30MethodConverter extends Converter {
 											// $ExpectError sorry, but I don't really know how to fix it and it works as intended
 											if (header.schema.type === 'array' && header.schema.items == null) header.schema.items = { type: 'string' };
 										}
-										if (header.example != null) delete header.example;
+										if (header.example) {
+											/**
+											 * Keep 'example' field as extension
+											 * */
+											header['x-example'] = header.example;
+											delete header.example;
+										}
 										if (header.schema.required != null) delete header.required;
 										if (header.repeat != null) delete header.repeat;
 									}
@@ -320,7 +326,15 @@ class Oas30MethodConverter extends Converter {
 						if (schema.type === 'array' && schema.items == null) schema.items = { type: 'string' };
 						delete schema.required;
 						header.schema = schema;
-
+						/**
+						 * Keep 'example' field as extension
+						 * */
+						if (header.example) {
+							header['x-example'] = header.example;
+						}
+						if (definition.example) {
+							header['x-example'] = definition.example;
+						}
 						helper.removePropertiesFromObject(header, ['example']);
 						Oas30MethodConverter.exportRequired(value, header);
 						Oas30RootConverter.exportAnnotations(value, header);

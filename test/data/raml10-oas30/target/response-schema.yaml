@@ -15,6 +15,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/pet'
+          headers:
+            Server:
+              x-example: Apache
+              schema:
+                type: string
         '201':
           description: ''
           content:

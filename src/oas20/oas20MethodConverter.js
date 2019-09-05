@@ -91,7 +91,13 @@ class Oas20MethodConverter extends Converter {
 											}
 											if (header.type === 'array' && !header.hasOwnProperty('items')) header.items = {type: 'string'};
 										}
-										if (header.hasOwnProperty('example')) delete header.example;
+										if (header.hasOwnProperty('example')) {
+											/**
+											 * Keep 'example' field as extension
+											 * */
+											header['x-example'] = header.example;
+											delete header.example;
+										}
 										if (header.hasOwnProperty('required')) delete header.required;
 										if (header.hasOwnProperty('repeat')) delete header.repeat;
 									}
@@ -326,6 +332,15 @@ class Oas20MethodConverter extends Converter {
 						if (!header.type) header.type = 'string';
 						if (header.$ref) delete header.$ref;
 						if (header.type === 'array' && !header.hasOwnProperty('items')) header.items = {type: 'string'};
+						/**
+						 * Keep 'example' field as extension
+						 * */
+						if (header.hasOwnProperty('example')) {
+							header['x-example'] = header.example;
+						}
+						if (definition.hasOwnProperty('example')) {
+							header['x-example'] = definition.example;
+						}
 						helper.removePropertiesFromObject(header, ['example']);
 						Oas20MethodConverter.exportRequired(value, header);
 						Oas20RootConverter.exportAnnotations(value, header);

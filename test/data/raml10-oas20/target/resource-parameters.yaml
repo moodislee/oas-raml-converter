@@ -8,6 +8,7 @@ paths:
       - in: path
         name: id
         required: true
+        x-example: 1
         type: integer
   '/employees/{code}':
     parameters:
@@ -15,6 +16,7 @@ paths:
         name: code
         required: true
         type: string
+        x-example: xyz
   '/names/{name}':
     parameters:
       - in: path
@@ -22,3 +24,4 @@ paths:
         name: name
         required: true
         type: string
+        x-example: John

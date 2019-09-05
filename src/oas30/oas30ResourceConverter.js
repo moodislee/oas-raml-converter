@@ -124,6 +124,15 @@ class Oas30ResourceConverter extends Converter {
 						parameter.description = parameter.schema.description;
 						delete parameter.schema.description;
 					}
+					if (parameter.schema.example) {
+						/**
+						 * Add 'example' field as extension, because oas doesn't support 'example' field in path params
+						 * Anyway, it is useful for some tools, for example dredd
+						 * @see https://github.com/apiaryio/dredd/issues/540
+						 * @see https://dredd.readthedocs.io/en/latest/how-it-works.html#uri-parameters
+						 * */
+						parameter['x-example'] = parameter.schema.example;
+					}
 					helper.removePropertiesFromObject(parameter, ['example']);
 					Oas30RootConverter.exportAnnotations(value, parameter);
 					parameters.push(parameter);

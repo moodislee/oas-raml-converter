@@ -18,4 +18,5 @@ paths:
           headers:
             names:
               description: names
+              x-example: fake
               type: string
