@@ -1,7 +1,7 @@
 # Export from Raml 1.0 to OAS 3.0
 
 # Table of Contents
-1. [Ojective](#objetive)
+1. [Objective](#objetive)
 2. [General Process](#general_process)
 3. [The root of the document](#root_document)
 4. [RAML Data types](#data_types)
